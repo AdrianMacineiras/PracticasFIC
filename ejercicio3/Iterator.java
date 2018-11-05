@@ -1,0 +1,10 @@
+package ejercicio3;
+
+public interface Iterator<E> {
+    
+    boolean hasNext();
+    
+    E next();
+    
+    void remove();
+}
