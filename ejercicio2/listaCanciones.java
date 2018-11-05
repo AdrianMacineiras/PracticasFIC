@@ -86,8 +86,4 @@ public class listaCanciones  {
         Collections.sort(canciones,comp);
     }
     
-    public Iterator iterator() {
-        return new ListaIterator(canciones);
-    }
-    
 }
