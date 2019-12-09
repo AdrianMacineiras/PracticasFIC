@@ -1,9 +1,8 @@
-package e1;
+package e2;
 
-import static e1.ClientTypeEnum.Basico;
+import static e2.ClientTypeEnum.Basico;
 import static java.util.stream.Collectors.toList;
 
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.List;
@@ -22,11 +21,19 @@ public class StockServiceImpl implements StockService {
 
         Double closeCotization = stockList.stream()
             .filter(stock -> stock.getSimbolo().equalsIgnoreCase(simbolo))
-            .min(Comparator.comparing(Stock::getFechaCotizacion))
+            .max(Comparator.comparing(Stock::getFechaCotizacion))
             .map(Stock::getCotizacion)
             .get();
 
-        stockBuilder = stockBuilder.withCierre(closeCotization);
+        Integer volumen = stockList.stream()
+            .filter(stock -> stock.getSimbolo().equalsIgnoreCase(simbolo))
+            .mapToInt(Stock::getVolumen)
+            .sum();
+
+        stockBuilder = stockBuilder
+            .withSimbolo(simbolo)
+            .withCierre(closeCotization)
+            .withVolumen(volumen);
 
         if (Basico.equals(clientType)) {
             return stockBuilder.build();
@@ -42,16 +49,10 @@ public class StockServiceImpl implements StockService {
                 .min(Comparator.comparing(Stock::getCotizacion))
                 .map(Stock::getCotizacion)
                 .get();
-            
-            Integer volumen = stockList.stream()
-                .filter(stock -> stock.getSimbolo().equalsIgnoreCase(simbolo))
-                .mapToInt(Stock::getVolumen)
-                .sum();
 
             return stockBuilder
                 .withMaximo(maxCotizacion)
                 .withMinimo(minCotizacion)
-                .withVolumen(volumen)
                 .build();
         }
 
@@ -59,8 +60,13 @@ public class StockServiceImpl implements StockService {
 
     public List<StockData> populateStockData(ClientTypeEnum clientType) {
         return stockList.stream()
-            .map(stock -> getStockValue(clientType, stock.getSimbolo()))
+            .map(Stock::getSimbolo)
+            .distinct()
+            .map(simbolo -> getStockValue(clientType, simbolo))
             .collect(toList());
     }
 
+    public List<Stock> getStockList() {
+        return this.stockList;
+    }
 }

@@ -1,4 +1,4 @@
-package e1;
+package e2;
 
 import java.util.List;
 
@@ -9,4 +9,6 @@ public interface StockService {
     StockData getStockValue(ClientTypeEnum clientType, String simbolo);
 
     List<StockData> populateStockData(ClientTypeEnum clientType);
+
+    List<Stock> getStockList();
 }

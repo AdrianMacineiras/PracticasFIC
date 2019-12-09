@@ -1,4 +1,6 @@
-package e1;
+package e2;
+
+import java.util.Objects;
 
 public class StockData {
 
@@ -34,6 +36,30 @@ public class StockData {
 
     public Integer getVolumen() {
         return this.volumen;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        StockData stockData = (StockData) o;
+        return Objects.equals(simbolo, stockData.simbolo) && Objects.equals(cierre, stockData.cierre) && Objects
+            .equals(maximo, stockData.maximo) && Objects.equals(minimo, stockData.minimo) && Objects.equals(volumen, stockData.volumen);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(simbolo, cierre, maximo, minimo, volumen);
+    }
+
+    @Override
+    public String toString() {
+        return "StockData{" + "simbolo='" + simbolo + '\'' + ", cierre=" + cierre + ", maximo=" + maximo + ", minimo=" + minimo
+            + ", volumen=" + volumen + '}';
     }
 
     public static class Builder {
