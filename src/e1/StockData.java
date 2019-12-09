@@ -7,10 +7,6 @@ public class StockData {
     private final Double maximo;
     private final Double minimo;
     private final Integer volumen;
-    
-    private StockData() {
-        
-    }
 
     protected StockData(String simbolo, Double cierre, Double maximo, Double minimo, Integer volumen) {
         this.simbolo = simbolo;
@@ -40,7 +36,7 @@ public class StockData {
         return this.volumen;
     }
 
-    public class Builder {
+    public static class Builder {
         private String simbolo;
         private Double cierre;
         private Double maximo;

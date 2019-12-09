@@ -1,3 +1,10 @@
+package e1;
+
+import static e1.ClientTypeEnum.Basico;
+import static java.util.stream.Collectors.toList;
+
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -36,23 +43,24 @@ public class StockServiceImpl implements StockService {
                 .map(Stock::getCotizacion)
                 .get();
             
-            Intege volumen = stockList.stream()
+            Integer volumen = stockList.stream()
                 .filter(stock -> stock.getSimbolo().equalsIgnoreCase(simbolo))
                 .mapToInt(Stock::getVolumen)
                 .sum();
 
             return stockBuilder
                 .withMaximo(maxCotizacion)
-                .withMinimo(minCotizaction)
-                .withVolument(volumen)
+                .withMinimo(minCotizacion)
+                .withVolumen(volumen)
                 .build();
         }
 
     }
 
     public List<StockData> populateStockData(ClientTypeEnum clientType) {
-        return stockList
+        return stockList.stream()
             .map(stock -> getStockValue(clientType, stock.getSimbolo()))
-            .collect(Collections.toList());
+            .collect(toList());
     }
+
 }

@@ -1,6 +1,6 @@
 package e1;
 
-import java.util.Objects;
+import java.time.LocalDateTime;
 
 public class Stock {
     private final String simbolo;
@@ -19,33 +19,16 @@ public class Stock {
        return this.simbolo;
    }
 
-   public void setSimbolo(String simbolo) {
-       this.simbolo = simbolo;
-   }
-
    public LocalDateTime getFechaCotizacion() {
        return fechaCotizacion;
-   }
-
-   public void setFechaCotizacion(LocalDateTime fechaCotizacion) {
-        this.fechaCotizacion = fechaCotizacion;
    }
 
    public Double getCotizacion() {
        return this.cotizacion;
    }
 
-   public void setCotizacion(Double cotizacion) {
-       this.cotizacion = cotizacion;
-   }
-
    public Integer getVolumen() {
-       return volumenm;
+       return volumen;
    }
-
-   public void setVolumen(Integer volumen) {
-       this.volumen = volumen;
-   }
-
    
 }

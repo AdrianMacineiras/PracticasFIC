@@ -1,8 +1,12 @@
+package e1;
+
+import java.util.List;
+
 public interface StockService {
 
     void addStock(Stock stock);
 
-    StockData getStockValue(ClientTypeEnum clientType);
+    StockData getStockValue(ClientTypeEnum clientType, String simbolo);
 
-    void populateStockData();
+    List<StockData> populateStockData(ClientTypeEnum clientType);
 }
